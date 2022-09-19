@@ -1,5 +1,9 @@
 name: Matrix build demo
 
+on:
+  push:
+  workflow_dispatch:
+
 jobs:
   matrix_job_demo:
     name: Matrix job demo
