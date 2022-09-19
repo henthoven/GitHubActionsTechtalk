@@ -18,8 +18,8 @@ jobs:
       with:
         dotnet-version: 6.0.x
     - name: Restore dependencies
-      run: dotnet restore .\GitHubActionsDemo\GitHubActionsDemo.csproj 
+      run: dotnet restore ./GitHubActionsDemo/GitHubActionsDemo.csproj 
     - name: Build
-      run: dotnet build --no-restore .\GitHubActionsDemo\GitHubActionsDemo.csproj 
+      run: dotnet build --no-restore ./GitHubActionsDemo/GitHubActionsDemo.csproj 
     - name: Test
-      run: dotnet test .\GitHubActionsDemo\GitHubActionsDemo.csproj --no-build --verbosity normal
+      run: dotnet test ./GitHubActionsDemo/GitHubActionsDemo.csproj --no-build --verbosity normal
