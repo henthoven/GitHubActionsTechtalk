@@ -1,0 +1,82 @@
+name: DemoFlow2
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+  workflow_dispatch:
+
+env:
+  var: test
+   
+jobs:
+  build:
+    name: Build, test and analyze
+  
+    runs-on: ubuntu-latest
+
+    steps:
+    - run: echo 'build, test and analuze running.....'
+
+  docker-build-and-push:
+    name: Build docker and publish to ACR
+    
+    runs-on: ubuntu-latest    
+    needs: build
+
+    steps:
+    - run: echo 'docker build and push running'
+
+    - run: echo ${{ github.ref }}
+
+  DeployToDev:
+    name: Deploy to dev
+    
+    runs-on: ubuntu-latest
+    needs: docker-build-and-push
+    
+    environment: dev
+    if: github.ref == 'refs/heads/master' # TODO: should be development
+
+    steps:
+    - run: echo 'DeployToDev running....'
+
+  DeployToTest:
+    name: Deploy to test
+    
+    runs-on: ubuntu-latest
+    needs: DeployToDev
+    
+    environment: test
+    if: github.ref == 'refs/heads/master' # TODO: should be development or release
+
+    steps:
+    - run: echo 'DeployToTest running....'
+
+  DeployToAcc:
+    name: Deploy to acc
+    
+    runs-on: ubuntu-latest
+    needs: DeployToTest
+    
+    environment: acc
+    if: startsWith(github.ref, 'refs/heads/release') 
+
+    steps:
+    - run: echo 'DeployToAcc running....'
+
+  DeployToPrd:
+    name: Deploy to prd
+    
+    runs-on: ubuntu-latest
+    needs: DeployToAcc
+    
+    environment: prd
+    if: startsWith(github.ref, 'refs/heads/release') 
+
+    steps:
+    - run: echo 'DeployToPrd running....'
+
+
+
