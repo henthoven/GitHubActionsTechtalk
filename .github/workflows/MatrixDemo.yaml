@@ -1,0 +1,13 @@
+name: Matrix build demo
+
+jobs:
+  matrix_job_demo:
+    name: Matrix job demo
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        version: [10, 12, 14]
+        os: [ubuntu-latest, windows-latest]
+    
+    steps:
+    - run: echo 'Hello from ${{ matrix.os }} - ${{ matrix.version }}'
