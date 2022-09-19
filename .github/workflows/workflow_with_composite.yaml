@@ -11,6 +11,6 @@ jobs:
       - id: foo
         uses: ./.github/workflows/composites/mycompositeaction
         with:
-          who-to-greet: 'Mona the Octocat'
+          who-to-greet: 'James Bond'
       - run: echo random-number ${{ steps.foo.outputs.random-number }}
         shell: bash
