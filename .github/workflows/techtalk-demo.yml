@@ -14,6 +14,7 @@ jobs:
     steps:
       - run: echo 'Hello there ${{ env.foo }}' 
       - run: echo 'My ref is ${{ github.ref }}'
+      - run: echo 'My secret is ${{ secrets.ONS_DB_WACHTWOORD }}'
       
   say-something-job2:
     name: 'My say something job 2'
