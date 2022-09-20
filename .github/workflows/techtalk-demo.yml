@@ -3,13 +3,26 @@ name: Techtalk demo dinsdag avond
 on:
   push:
   
+env:
+  foo: 'Foo value'
+
 jobs:
   say-something-job:
     name: 'My say something job'
     runs-on: ubuntu-latest
     
     steps:
-      - run: echo 'Hello there' 
+      - run: echo 'Hello there ${{ env.foo }}' 
+      - run: echo 'My ref is ${{ github.ref }}'
+      
+  say-something-job2:
+    name: 'My say something job 2'
+    runs-on: ubuntu-latest
+    
+    if: env.foo == 'iets' 
+    
+    steps:
+      - run: echo 'Hello there ${{ env.foo }}' 
       
       
     
