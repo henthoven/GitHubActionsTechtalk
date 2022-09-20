@@ -18,9 +18,7 @@ jobs:
   say-something-job2:
     name: 'My say something job 2'
     runs-on: ubuntu-latest
-    
-    if: env.foo == 'iets' 
-    
+
     steps:
       - run: echo 'Hello there ${{ env.foo }}' 
       
